@@ -1,105 +1,187 @@
-def verif_tree(tree):
-    operators = "()[],;:."
-    # Count brackets
-    brack_open = tree.count("(")
-    brack_clos = tree.count(")")
-    if brack_open == brack_clos:
-        print("The number of bracket is correct.")
-        check_bracket = 1
-    elif brack_open > brack_clos:
-        errors["X"] = "Number of opening bracket superior to closing bracket."
-        print("Number of opening bracket superior to closing bracket. The programm will not search for empty brackets.")
-        check_bracket = 2
+import time
+
+def verif(tree, verbose = False, speed = 0.2):
+    errors = {} # Errors
+    taxa = {} # Taxa
+    tax_val = {} # Values associated to taxa
+    nod_val = {} # Values associated to nodes
+    tf_nod_val = {} # Update of numbers associated to nodes
+    nod_tax = {} # Taxonomic content of nodes
+    tf_nod_tax = {} # Update of numbers associated to nodes
+
+    ob = [] # open brackets
+    nod_l = [] # node list
+
+    st = "" # Storage
+    pos = "" # Last colon position
+    ctax = 0 # Taxa counter
+    switch = True # Switch between branch - False / taxon storage - True
+    obc = 0 # Open nodes counter
+
+    operators = "(),;:" # All operators
+
+    # Check absolute number of brackets
+    if tree.count("(") == tree.count(")"):
+        if verbose == True:
+            print("The number of bracket is correct. The software will search empty brackets.")
+        brack = 1
+    elif tree.count("(") > tree.count(")"):
+        if verbose == True:
+            print("There are more opening than closing brackets. The software will not search empty brackets.")
+        errors["Brackets"] = "Number of opening brackets superior to closing brackets."
+        brack = 2
     else:
-        check_bracket = 3
-        print("Number of opening bracket inferior to closing bracket. The programm will not search for empty brackets.")
-    # Reading tree
-    c = 0 # character counter
-    bp = 0 # bypass counter
-    brc = 0 # bracket counter ; missing
-    cob = 0 # bracket counter ; empty
-    t = "" # taxon name storage
-    taxa = []
-    errors = {}
-    nodes = {}
-    brackets = []
-    while c != len(tree):
-        if operators.find(tree[c]) != -1: # Character c is an operator
-            if len(t) > 0: # If t contains a taxon, then append the list of taxa and empty t.
-                taxa.append(t)
-                for i in range(len(brackets)):
-                    nodes[brackets[i]].append(t)
-                print(t,"added to the list of taxa")
-                t = ""
-            if operators.find(tree[c]) == 4: # test coma
-                bp += 1
-                if operators.find(tree[c - 1]) == -1 and operators.find(tree [c + 1]) == -1: # Both character c - 1 and c + 1 are taxa -- Rule 1
-                    print("Coma at position",c,"ok")
-                else:
-                    if operators.find(tree[c - 1]) == -1 and operators.find(tree [c + 1]) == 0: # If rule 1 false and character c-1 is taxa and c + 1 is opening bracket -- Rule 2
-                        print("Coma at position",c,"ok")
-                    else:
-                        if operators.find(tree[c - 1]) == 1 and operators.find(tree[c + 1]) == 0: # If rule 1 and 2 are false, and character c-1 is closed bracket and character c + 1 is opening bracket -- Rule 3
-                            print("Coma at position",c,"ok")
-                        else:
-                            if operators.find(tree[c - 1]) == 1 and operators.find(tree[c + 1]) == -1: # IF previous rules false and taxa following a closing bracket -- Rule 4
-                                print("Coma at position",c,"ok")
-                            else:
-                                print("Coma at position",c,"misplaced")
-                                errors[c] = "Coma misplaced" # Add error to the list of errors
-            if bp == 0 & operators.find(tree[c]) == 5: # semicolon
-                bp += 1
-                if c != len(tree) - 1: # If semicolon is not the last character of the string
-                    errors[c] = "Semicolon misplaced"
-            if check_bracket == 3 and bp == 0 and operators.find(tree[c]) == 0: # opening bracket ; search for missing brackets
-                bp += 1
-                brc += 1
-                print(brc,"opened nodes.")
-            if check_bracket == 3 and bp == 0 and operators.find(tree[c]) == 1: # closing bracket ; search for missing brackets
-                bp += 1
-                brc -= 1
-                if brc == 0 & c != len(tree) - 1:
-                    errors[c] = "Number of opening brackets inferior to closing brackets"
-                elif brc < 0:
-                    errors[c] = "Number of opening brackets inferior to closing brackets"
-                else:
-                    print(brc,"opened nodes.")
-            if check_bracket == 1 and bp == 0 and operators.find(tree[c]) == 0: # opening bracket ; search for empty brackets
-                bp += 1
-                nodes[cob] = []
-                brackets.append(cob)
-                cob += 1
-            if check_bracket == 1 and bp == 0 and operators.find(tree[c]) == 1: # closing bracket ; search for empty brackets
-                if len(brackets) > 0:
-                    brackets.pop(-1)
-        else: # Character c is not an operator
-            t += tree[c]
-        bp = 0
-        c += 1
-        # Code rencontre un caractère différent des operateurs
-    # Loop ending
-    if tree[len(tree) - 1] != ";":
-        errors[len(tree) - 1] = "Absence of semicolon at the end of the tree"
-    if tree[len(tree) - 2] != ")":
-        errors[len(tree) - 2] = "There should be a closing bracket here"
+        if verbose == True:
+            print("There are less opening than closing brackets. The software will not search empty brackets.")
+        brack = 3
+    
+    # Preliminary tests
     if tree[0] != "(":
-        errors[0] = "The tree should begin by an opening bracket"
-    for i in range(len(nodes) - 1):
-        if len(nodes[i]) < 2:
-            errors["Node",i] = "The node",i,"contains less than two taxa"
-        j = i + 1
-        while j != len(nodes):
-            if len(nodes[i]) == len(nodes[j]):
-                if nodes[i] == nodes[j]:
-                    errors[i,"-",j] = "The nodes",i,"and",j,"have the same content"
-            j += 1
-    print("Results:\n",brack_open,"opening brackets\n",brack_clos,"closing brackets\n",len(taxa),"taxa\n",len(errors),"errors")
-    print("Do you want to display the full list of taxa? y/n")
-    disp_taxa = input()
-    if disp_taxa == "y":
-        print(taxa)
-    if len(errors) > 0:
-        print("Do you want to display the full list of errors? y/n")
-        disp_errors = input()
-        if disp_errors == "y":
-            print(errors)
+        errors[0] = "The tree should start with an opening bracket."
+        if verbose == True:
+            print("The tree does not start with an opening bracket.")
+
+    if tree[len(tree) - 1] != ";":
+        errors[len(tree) - 1] = "Absence of a closing semicolon at the end of the tree"
+        if verbose == True:
+            print(f"Absence of semicolon at the end of the sequence.")
+    if tree[len(tree) - 2] != ")":
+        errors[len(tree) - 2] = "Absence of the bracket closing the root"
+        if verbose == True:
+            print(f"Absence of a bracket at the end of the tree.")
+    
+    if verbose == True:
+        time.sleep(0.5)
+
+    # Reading tree
+    for i in range(len(tree)): # Initializing the loop
+        if verbose == True:
+            print(f"Loop {i}")
+            print(f"Switch is {switch}")
+        if operators.find(tree[i]) != -1: # Char i is an operator
+            if len(st) > 0: # Non empty storage
+                if switch == True: # Switch is on taxa
+                    taxa[ctax] = st
+                    if verbose == True:
+                        print(f"Taxon {st} added to the list of taxa")
+                    ctax += 1
+                    for j in range(len(ob)):
+                        nod_tax[ob[j]].append(st)
+                        if verbose == True:
+                            print(f"Taxon {st} added to node {j}")
+                    st = ""
+                else: # Switch is on values
+                    if operators.find(tree[pos]) == -1: # Char before colon is not an operator
+                        tax_val[ctax - 1] = st
+                        if verbose == True:
+                            print(f"Value {st} associated to {taxa[ctax -1]}")
+                        st = ""
+                    elif tree[pos] == ")": # Char before colon is a closing bracket
+                        nod_val[nod_l[-1]] = st
+                        nod_l.pop(-1)
+                        if verbose == True:
+                            print(f"Open nodes without associated values: {nod_l}")
+                        st = ""
+                        pos = ""
+                    else:
+                        errors[pos] = "Missplaced colon."
+                        if verbose == True:
+                            print(f"Colon at position {pos} missplaced.")
+                        st = ""
+                        pos = ""
+                    switch = True
+            if tree[i] == ",": # Char is a coma
+                if operators.find(tree[i - 1]) == -1 and operators.find(tree[i + 1]) == -1: # Coma is between two taxa -- RULE 1
+                    if verbose == True:
+                        print(f"Coma at position {i}: OK")
+                elif operators.find(tree[i - 1]) == -1 and tree[i + 1] == "(": # Coma is between a taxon and an opening bracket -- RULE 2
+                    if verbose == True:
+                        print(f"Coma at position {i}: OK")
+                elif tree[i - 1] == ")" and tree[i + 1] == "(": # Coma is between a closing and an opening bracket -- RULE 3
+                    if verbose == True:
+                        print(f"Coma at position {i}: OK")
+                elif tree[i - 1] == ")" and operators.find(tree[i + 1]) == -1: # Coma is between a closing bracket and a taxon -- RULE 4
+                    if verbose == True:
+                        print(f"Coma at position {i}: OK")
+                else: # If the four rules have proven to be false
+                    errors[i] = "Coma missplaced at position", i
+                    if verbose == True:
+                        print(f"Coma at position {i} is missplace.")
+            elif tree[i] == ";": # Char is a semicolon
+                if i != len(tree) -1:
+                    errors[i] = "Missplaced semicolon"
+                    if verbose == True:
+                        print(f"Missplaced semicolon at position {i}.")
+            elif tree[i] == "(": # Char is an opening bracket
+                if brack == 1:
+                    nod_l.append(obc)
+                    nod_tax[obc] = []
+                    ob.append(obc)
+                    if verbose == True:
+                        print(f"Opening node {obc} for taxonomic content.")
+                        print(f"Adding node {obc} to the nodes list.")
+                obc += 1
+                if verbose == True:
+                    print(f"{obc} open nodes.")
+            elif tree[i] == ")": # Char is a closing bracket
+                if brack == 1:    
+                    if len(ob) > 0: # There is at least one open bracket
+                        if verbose == True:
+                            print(f"Closing node {ob[-1]}. There are still {len(ob)} open nodes.")
+                        ob.pop(-1) # Closing last bracket
+                elif brack == 3:
+                    obc -= 1
+                    if (obc == 0 and i != len(tree) -1) or obc < 0:
+                        errors[i] = "Extra closing bracket"
+                        if verbose == True:
+                            print(f"Extra closing bracket found at position {i}.")
+                    else:
+                        if verbose == True:
+                            print(f"{obc} open nodes remaining.")
+            elif tree[i] == ":": # Char is a colon
+                if operators.find(tree[i + 1]) != -1: # Colon followed by another operator. Empty value
+                    errors[i] = "Associated value missing."
+                    if verbose == True:
+                        print(f"Colon at position {i} is missing an associated value.")
+                else:
+                    switch = False # Begin storage of a value
+                    pos = i - 1
+                    if verbose == True:
+                        print(f"Colon found followed by a value. Begin storage")
+        else: # Char i is not an operator
+            st += tree[i]
+            if verbose == True:
+                print(f"Storage: {st}")
+        if verbose == True:
+            time.sleep(speed)
+
+    # Check of taxonomic content of nodes
+    for i in range(len(nod_tax) -1):
+        if len(nod_tax[i]) <2:
+            errors[len(taxa) + i] = "Taxonomic content too low."
+            if verbose == True:
+                print(f"The node {len(taxa) + 1} contains less than two taxa, or one taxa and a non-empty node.")
+            j = i + 1
+            while j != len(nod_tax):
+                if nod_tax[i] == nod_tax[j]:
+                    errors[len(taxa) + i, "-", len(taxa) + j] = "These two nodes have the exact same content"
+                    if verbose == True:
+                        print(f"The taxonomic content of the nodes {len(taxa) + j} and {len(taxa) + i} are identical.")
+                j += 1
+
+    t = len(taxa)  
+    j = 0
+    while t != len(nod_tax) + len(taxa):
+        if j > 0 and len(nod_val) > 0:
+            tf_nod_val[t] = nod_val[j]
+        tf_nod_tax[t] = nod_tax[j]
+        j += 1
+        t += 1
+    
+    # Statistics and results
+    print(f"Tree statistics:\n{len(nod_tax)} nodes;\n{len(taxa)} taxa;\n{len(errors)} errors")
+    if len(nod_val) or len(tax_val) != 0:
+        print("This tree contains values.")
+    else:
+        print("This tree does not contain values.")
+    return(errors, taxa, tax_val, tf_nod_tax, tf_nod_val)
