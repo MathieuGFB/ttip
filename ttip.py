@@ -2,9 +2,9 @@
 
 import time
 from verif import verif
-from shfunc import fold, uncom, recog, load
+from shfunc import load
 from hierarchy import comput_hierarchy
-from phymat import comput_branches, pr_phymat
+from phymat import comput_vcv, comput_anv
 
 print("#######################\n###                 ###\n###    TTiP v0.1    ###\n###                 ###\n#######################")
 print("Designed and coded by M. G. Faure-Brac.\nContact at: faurebrac.mathieu@gmail.com, or through GitHub.")
@@ -13,15 +13,17 @@ print("Designed and coded by M. G. Faure-Brac.\nContact at: faurebrac.mathieu@gm
 tree = {}
 
 ## LISTS ##
-phymat = []
+vcv = []
 errors = []
 taxa = []
 tax_val = []
 nod_tax = []
 nod_val = []
+fc_nod_tax =[]
 hierarchy = []
 val = []
 abs_nod_val = []
+root_tip = []
 prvar = [errors,taxa,tax_val,nod_tax,nod_val,hierarchy,val,abs_nod_val]
 
 ## VARIABLES ##
@@ -42,8 +44,8 @@ yn = "yn"
 path_tree = ""
 
 # DEFAULT PARAMETERS #
-verbose = False
-speed = 0.2 # Speed of time.sleep if verbose == T
+verbose = True
+speed = 0 # Speed of time.sleep if verbose == T
 q = False # Exit variable
 
 while q == False:
@@ -56,6 +58,18 @@ while q == False:
             while yn.find(replace.lower()) == -1:
                 print("Please, answer by Y or N. --- ")
             if replace.lower() == "y":
+                vcv = []
+                errors = []
+                taxa = []
+                tax_val = []
+                nod_tax = []
+                nod_val = []
+                fc_nod_tax = []
+                hierarchy = []
+                val = []
+                abs_nod_val = []
+                root_tip = []
+                tree = {}
                 path_tree = input("Provide file path: ")
                 tree = load(path_tree, verbose, speed)
                 print("Extraction successfull")
@@ -69,7 +83,7 @@ while q == False:
         try:
             tree
         except:
-            print(f"There is no tree in cache. Please load a file.")
+            print(f"There is no tree in cache. Consider loading a file.")
         else:
             for i in range(len(tree)):                
                 if verbose == True:
@@ -80,21 +94,40 @@ while q == False:
                 nod_t = {}
                 nod_v = {}
                 hier = {}
-                error, tax, tax_v, nod_t, nod_v = verif(tree[i], verbose, speed)
+                fc_nod_t = {}
+                error, tax, tax_v, nod_t, nod_v, fc_nod_t = verif(tree[i], verbose, speed)
                 errors.append(error)
                 taxa.append(tax)
                 tax_val.append(tax_v)
                 nod_tax.append(nod_t)
                 nod_val.append(nod_v)
+                fc_nod_tax.append(fc_nod_t)
                 val.append(tax_v)
                 val[-1].update(nod_v)
                 hier = comput_hierarchy(tree[i], taxa[i], nod_tax[i])
                 hierarchy.append(hier)
                 time.sleep(speed)
     elif int(choice) == 3:
-        print("This option is in development. Please, choose another one.")
-        #phymat = comput_branches(hierarchy, taxa, verbose = verbose, speed= speed)
-        #abs_nod_val = comput_abs_nod(hierarchy, val, taxa, verbose = verbose, speed= speed)
+        print("This option is in development. Use with caution.")
+        for i in range(len(tree)):
+            if len(val[i]) == 0:
+                print(f"Tree {i} does not contains any values.")
+            else:
+                pm = comput_vcv(hierarchy[i], val[i], taxa[i], verbose, speed)
+                vcv.append(pm)
+                rt = comput_anv(vcv[i], taxa[i], hierarchy[i], verbose, speed)
+                root_tip.append(rt)
+                k = list(root_tip[i].keys())[-2]
+                root = root_tip[i][list(root_tip[i].keys())[-1]]
+                while k != list(root_tip[i].keys())[0]:
+                    if root_tip[i][k] >= root:
+                        root = root_tip[i][k]
+                        if verbose == True:
+                            r = k
+                k -= 1
+                if verbose == True:
+                    print(f"Root values anchored on taxon {r}")
+                    time.sleep(speed)
     elif int(choice) == 4:
         print("This option is in development. Please, choose another one.")
     elif int(choice) == 5:
@@ -107,9 +140,9 @@ while q == False:
         #       tmp_prvar.append(prvar[i])
         #pr_phymat(hierarchy, taxa, phymat)
     elif int(choice) == 7:
-        change_param = input(f"Which parameter would you like to modify?\n1. Verbose: {verbose} - Displays additional information in various functions\n2. Speed: {speed} - Verbose option. Change the speed of the printing of additional information. Warning: slow done the computations\n3. None")
+        change_param = input(f"Which parameter would you like to modify?\n1. Verbose: {verbose} - Displays additional information in various functions\n2. Speed: {speed} - Verbose option. Change the speed of the printing of additional information. Warning: slow done the computations\n3. None --- ")
         while param.find(change_param) == -1:
-            change_param = input("Please, enter a choice between 1 to 3.\n1. Verbose\n2. Speed\n3. None")
+            change_param = input("Please, enter a choice between 1 to 3.\n1. Verbose\n2. Speed\n3. None --- ")
         if int(change_param) == 1:
             verbose = not verbose
             if verbose == True:
@@ -117,9 +150,9 @@ while q == False:
             else:
                 print(f"Verbose is now deactivated. There will be no additional information during the computation.")
         elif int(change_param) == 2:
-            speed = input("Please, enter a new numerical value. It corresponds to the time in seconds the software will wait between two information.")
+            speed = input("Please, enter a new numerical value. It corresponds to the time in seconds the software will wait between two information. --- ")
             while not isinstance(speed, int) or not isinstance(speed, float):
-                speed = input("Please, enter a numerical value.")
+                speed = input("Please, enter a numerical value. --- ")
             print(f"The new speed is now of {speed}s.")
         else:
             print("Back to main menu")
