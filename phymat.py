@@ -1,6 +1,6 @@
 import time
 
-def comput_vcv(hierarchy, val, taxa, verbose = False, speed = 0.2):
+def comput_vcv(hierarchy, taxa, verbose = False, speed = 0.2):
     phymat = []
     for r in range(len(hierarchy)):
         row = []
@@ -20,15 +20,19 @@ def comput_vcv(hierarchy, val, taxa, verbose = False, speed = 0.2):
         phymat.append(row)
         if verbose == True:
             time.sleep(speed)
-
-    for r in range(len(hierarchy)):
-        for c in list(val.keys()):
-            if phymat[r][c] == 1:
-                    phymat[r][c] = float(val[c])
-            if verbose == True:
-                print(f"Branch between {r} and {c}: {phymat[r][c]}")
-                time.sleep(speed)    
     return(phymat)
+
+def vcv_bl(vcv, hierarchy, val, verbose = False, speed = 0.2):
+    if val:
+        for r in range(len(hierarchy)):
+            for c in list(val.keys()):
+                if vcv[r][c] == 1:
+                        vcv[r][c] = float(val[c])
+                if verbose == True:
+                    print(f"Branch between {r} and {c}: {vcv[r][c]}")
+                    time.sleep(speed)    
+    
+    return(vcv)
 
 def comput_anv(vcv, taxa, hierarchy, verbose = False, speed = 0.2):
     root_tip = {}
