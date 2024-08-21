@@ -92,6 +92,7 @@ while q == False:
                 val[-1].update(nod_v)
                 hier = comput_hierarchy(trees_list[i].seq, trees_list[i].taxa, nod_tax[i])
                 hierarchy.append(hier)
+                trees_list[i].vcv = comput_vcv(hierarchy[i], trees_list[i].taxa, verbose, speed)
                 time.sleep(speed)
             del(tax_v, nod_t, nod_v, hier)
     elif int(choice) == 3:
@@ -100,7 +101,6 @@ while q == False:
             if len(val[i]) == 0:
                 print(f"Tree {i} does not contains any values.")
             else:
-                trees_list[i].vcv = comput_vcv(hierarchy[i], val[i], trees_list[i].taxa, verbose, speed)
                 rt = comput_anv(trees_list[i].vcv, trees_list[i].taxa, hierarchy[i], verbose, speed)
                 root_tip.append(rt)
                 k = list(root_tip[i].keys())[-2]
