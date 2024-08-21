@@ -6,9 +6,9 @@ from shfunc import load
 from hierarchy import comput_hierarchy
 from phymat import comput_vcv, comput_anv
 
-v = 0.1
+v = '0.1.1' # Current version of software
 
-print(f"#######################\n###                 ###\n###    TTiP v{v}    ###\n###                 ###\n#######################\n\nDesigned and coded by M. G. Faure-Brac.\nContact at: faurebrac.mathieu@gmail.com, or through GitHub.")
+print(f"#######################\n###                 ###\n###   TTiP v{v}   ###\n###                 ###\n#######################\n\nDesigned and coded by M. G. Faure-Brac.\nContact at: faurebrac.mathieu@gmail.com, or through GitHub.\n\n")
 
 ## DICTIONNARIES ##
 trees_list = {} # Containing all objects of class 'tree_obj'
@@ -45,15 +45,16 @@ speed = 0.05 # Speed of time.sleep if verbose == T
 q = False # Exit variable
 
 while q == False:
-    choice = input("What do you want to do?\n1) Load a file\n2) Check tree structure\n3) Check tree branch lengths\n4) Assemble trees\n5) Manipulate trees\n6) Print output\n7) Access parameters\n8) Quit TTiP --- ")
+    choice = input("What do you want to do?\n\n1) Load a file\n2) Check tree structure\n3) Check tree branch lengths\n4) Assemble trees\n5) Manipulate trees\n6) Print output\n7) Access parameters\n8) Quit TTiP\n\n Your choice :  ")
     while options.find(str(choice)) == -1:
-        choice = input("Please, enter a choice between 1 to 8.\n1) Load a file\n2) Check tree structure\n3) Check tree branch lengths\n4) Assemble trees\n5) Manipulate trees\n6) Print output\n7) Access parameters\n8) Quit software --- ")
+        choice = input("Please, enter a choice between 1 to 8.\n\n1) Load a file\n2) Check tree structure\n3) Check tree branch lengths\n4) Assemble trees\n5) Manipulate trees\n6) Print output\n7) Access parameters\n8) Quit TTiP\n\n Your choice :  ")
     if int(choice) == 1: # Load a new file
         if len(trees_list) != 0 or len(path_tree) != 0: # If there is already a tree loaded
             replace = input("You already have at least a tree or a file loaded. Would you like to replace it? Y/N --- \n")
             while yn.find(replace.lower()) == -1:
                 print("Please, answer by Y or N. --- ")
             if replace.lower() == "y":
+                trees_list = {}
                 tax_val = []
                 nod_tax = []
                 nod_val = []
@@ -71,9 +72,7 @@ while q == False:
             trees_list = load(path_tree, verbose, speed)
             print("Extraction successfull")
     elif int(choice) == 2:
-        try:
-            trees_list
-        except:
+        if len(trees_list) == 0:
             print(f"There is no tree in cache. Consider loading a file.")
         else:
             for i in range(len(trees_list)):                
