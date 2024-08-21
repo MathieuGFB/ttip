@@ -5,6 +5,7 @@ from verif import verif
 from shfunc import load
 from hierarchy import comput_hierarchy
 from phymat import comput_vcv, comput_anv
+from print import probject
 
 v = '0.1.1' # Current version of software
 
@@ -120,7 +121,10 @@ while q == False:
     elif int(choice) == 5:
         print("This option is in development. Please, choose another one.")
     elif int(choice) == 6:
-        print("This option is in development. Please, choose another one.")
+        if len(trees_list) > 0:
+            probject(trees_list)
+        else:
+            print(f"There is no tree in cache. Consider loading a file.")
     elif int(choice) == 7:
         change_param = input(f"Which parameter would you like to modify?\n1. Verbose: {verbose} - Displays additional information in various functions\n2. Speed: {speed} - Verbose option. Change the speed of the printing of additional information. Warning: slow done the computations\n3. None --- ")
         while param.find(change_param) == -1:
