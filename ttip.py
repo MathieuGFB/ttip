@@ -11,7 +11,6 @@ v = 0.1
 print(f"#######################\n###                 ###\n###    TTiP v{v}    ###\n###                 ###\n#######################\n\nDesigned and coded by M. G. Faure-Brac.\nContact at: faurebrac.mathieu@gmail.com, or through GitHub.")
 
 ## DICTIONNARIES ##
-tree = {}
 trees_list = {} # Containing all objects of class 'tree_obj'
 
 ## LISTS ##
@@ -50,7 +49,7 @@ while q == False:
     while options.find(str(choice)) == -1:
         choice = input("Please, enter a choice between 1 to 8.\n1) Load a file\n2) Check tree structure\n3) Check tree branch lengths\n4) Assemble trees\n5) Manipulate trees\n6) Print output\n7) Access parameters\n8) Quit software --- ")
     if int(choice) == 1: # Load a new file
-        if len(tree) != 0 or len(path_tree) != 0: # If there is already a tree loaded
+        if len(trees_list) != 0 or len(path_tree) != 0: # If there is already a tree loaded
             replace = input("You already have at least a tree or a file loaded. Would you like to replace it? Y/N --- \n")
             while yn.find(replace.lower()) == -1:
                 print("Please, answer by Y or N. --- ")
@@ -73,13 +72,13 @@ while q == False:
             print("Extraction successfull")
     elif int(choice) == 2:
         try:
-            tree
+            trees_list
         except:
             print(f"There is no tree in cache. Consider loading a file.")
         else:
-            for i in range(len(tree)):                
+            for i in range(len(trees_list)):                
                 if verbose == True:
-                    print(f"Verification of tree {i} on {len(tree) -1}")
+                    print(f"Verification of tree {i} on {len(trees_list) -1}")
                 tax_v = {}
                 nod_t = {}
                 nod_v = {}
@@ -98,7 +97,7 @@ while q == False:
             del(tax_v, nod_t, nod_v, hier)
     elif int(choice) == 3:
         print("This option is in development. Use with caution.")
-        for i in range(len(tree)):
+        for i in range(len(trees_list)):
             if len(val[i]) == 0:
                 print(f"Tree {i} does not contains any values.")
             else:
@@ -123,11 +122,6 @@ while q == False:
         print("This option is in development. Please, choose another one.")
     elif int(choice) == 6:
         print("This option is in development. Please, choose another one.")
-        #tmp_prvar = []
-        #for i in range(len(prvar)):
-        #    if len(prvar[i]) > 0:
-        #       tmp_prvar.append(prvar[i])
-        #pr_phymat(hierarchy, taxa, phymat)
     elif int(choice) == 7:
         change_param = input(f"Which parameter would you like to modify?\n1. Verbose: {verbose} - Displays additional information in various functions\n2. Speed: {speed} - Verbose option. Change the speed of the printing of additional information. Warning: slow done the computations\n3. None --- ")
         while param.find(change_param) == -1:
