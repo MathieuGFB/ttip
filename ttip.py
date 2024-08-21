@@ -6,25 +6,22 @@ from shfunc import load
 from hierarchy import comput_hierarchy
 from phymat import comput_vcv, comput_anv
 
-print("#######################\n###                 ###\n###    TTiP v0.1    ###\n###                 ###\n#######################")
-print("Designed and coded by M. G. Faure-Brac.\nContact at: faurebrac.mathieu@gmail.com, or through GitHub.")
+v = 0.1
+
+print(f"#######################\n###                 ###\n###    TTiP v{v}    ###\n###                 ###\n#######################\n\nDesigned and coded by M. G. Faure-Brac.\nContact at: faurebrac.mathieu@gmail.com, or through GitHub.")
 
 ## DICTIONNARIES ##
 tree = {}
+trees_list = {} # Containing all objects of class 'tree_obj'
 
 ## LISTS ##
-vcv = []
-errors = []
-taxa = []
 tax_val = []
 nod_tax = []
 nod_val = []
-fc_nod_tax =[]
 hierarchy = []
 val = []
 abs_nod_val = []
 root_tip = []
-prvar = [errors,taxa,tax_val,nod_tax,nod_val,hierarchy,val,abs_nod_val]
 
 ## VARIABLES ##
 options = "12345678"
@@ -45,7 +42,7 @@ path_tree = ""
 
 # DEFAULT PARAMETERS #
 verbose = True
-speed = 0 # Speed of time.sleep if verbose == T
+speed = 0.05 # Speed of time.sleep if verbose == T
 q = False # Exit variable
 
 while q == False:
@@ -58,26 +55,21 @@ while q == False:
             while yn.find(replace.lower()) == -1:
                 print("Please, answer by Y or N. --- ")
             if replace.lower() == "y":
-                vcv = []
-                errors = []
-                taxa = []
                 tax_val = []
                 nod_tax = []
                 nod_val = []
-                fc_nod_tax = []
                 hierarchy = []
                 val = []
                 abs_nod_val = []
                 root_tip = []
-                tree = {}
                 path_tree = input("Provide file path: ")
-                tree = load(path_tree, verbose, speed)
+                trees_list = load(path_tree, verbose, speed)
                 print("Extraction successfull")
             else:
                 print("Back to main menu")
         else:
             path_tree = input("Provide file path: ")
-            tree = load(path_tree, verbose, speed)
+            trees_list = load(path_tree, verbose, speed)
             print("Extraction successfull")
     elif int(choice) == 2:
         try:
@@ -88,34 +80,30 @@ while q == False:
             for i in range(len(tree)):                
                 if verbose == True:
                     print(f"Verification of tree {i} on {len(tree) -1}")
-                error = {}
-                tax = {}
                 tax_v = {}
                 nod_t = {}
                 nod_v = {}
                 hier = {}
-                fc_nod_t = {}
-                error, tax, tax_v, nod_t, nod_v, fc_nod_t = verif(tree[i], verbose, speed)
-                errors.append(error)
-                taxa.append(tax)
+                trees_list[i].errors, trees_list[i].taxa, tax_v, nod_t, nod_v = verif(trees_list[i].seq, verbose, speed)
+                if len(tax_v) > 0 or len(nod_v) > 0:
+                    trees_list[i].bl = True
                 tax_val.append(tax_v)
                 nod_tax.append(nod_t)
                 nod_val.append(nod_v)
-                fc_nod_tax.append(fc_nod_t)
                 val.append(tax_v)
                 val[-1].update(nod_v)
-                hier = comput_hierarchy(tree[i], taxa[i], nod_tax[i])
+                hier = comput_hierarchy(trees_list[i].seq, trees_list[i].taxa, nod_tax[i])
                 hierarchy.append(hier)
                 time.sleep(speed)
+            del(tax_v, nod_t, nod_v, hier)
     elif int(choice) == 3:
         print("This option is in development. Use with caution.")
         for i in range(len(tree)):
             if len(val[i]) == 0:
                 print(f"Tree {i} does not contains any values.")
             else:
-                pm = comput_vcv(hierarchy[i], val[i], taxa[i], verbose, speed)
-                vcv.append(pm)
-                rt = comput_anv(vcv[i], taxa[i], hierarchy[i], verbose, speed)
+                trees_list[i].vcv = comput_vcv(hierarchy[i], val[i], trees_list[i].taxa, verbose, speed)
+                rt = comput_anv(trees_list[i].vcv, trees_list[i].taxa, hierarchy[i], verbose, speed)
                 root_tip.append(rt)
                 k = list(root_tip[i].keys())[-2]
                 root = root_tip[i][list(root_tip[i].keys())[-1]]
@@ -128,6 +116,7 @@ while q == False:
                 if verbose == True:
                     print(f"Root values anchored on taxon {r}")
                     time.sleep(speed)
+                del(rt)
     elif int(choice) == 4:
         print("This option is in development. Please, choose another one.")
     elif int(choice) == 5:

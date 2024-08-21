@@ -1,5 +1,7 @@
 import time
 
+from tree import tree_obj
+
 def fold(tree): # Function aiming to 'fold' trees in a unique line
     tree = tree.replace(' ','')
     c = 0
@@ -53,7 +55,7 @@ def recog(tree, verbose, speed):
     return(srt_trees)
 
 def load(path_tree, verbose, speed):
-    tree = {}
+    trees_list = {}
     try:
         open(path_tree, "r").read()
     except:
@@ -68,16 +70,22 @@ def load(path_tree, verbose, speed):
         if filext == True:
             rawtree = open(path_tree, "r").read()
             if rawtree.count(";\n") > 1:
-                tree = recog(rawtree, verbose,speed)
+                trees = recog(rawtree, verbose,speed)
             else:
-                tree[0] = rawtree
-            for i in range(len(tree)):
-                if len(tree) > 1:
-                    tmp = str(tree[i])
+                trees[0] = rawtree
+            for i in range(len(trees)):
+                if len(trees) > 1:
+                    tmp = str(trees[i])
                     tmp = tmp[2:len(tmp)-2]
-                    tree[i] = uncom(fold(tmp))
+                    trees_list[i] = tree_obj()
+                    trees_list[i].seq = uncom(fold(tmp))
+                    if verbose == True:
+                        print(f"Object tree {i} created.")
                 else:
-                    tree[0] = uncom(fold(tree[0]))
-            return(tree)
+                    trees_list[0] = tree_obj()
+                    trees_list[0].seq = uncom(fold(trees[0]))
+                    if verbose == True:
+                        print("Object tree created")
+            return(trees_list)
         else:
             print(f"This file is non supported. .tre; .tree and .phy are the only supported files.")

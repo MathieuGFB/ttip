@@ -184,4 +184,4 @@ def verif(tree, verbose = False, speed = 0.2):
         print("This tree contains values.")
     else:
         print("This tree does not contain values.")
-    return(errors, taxa, tax_val, tf_nod_tax, tf_nod_val, nod_tax)
+    return(errors, taxa, tax_val, tf_nod_tax, tf_nod_val)
