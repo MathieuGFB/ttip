@@ -47,9 +47,10 @@ def recog(tree, verbose, speed):
     st = "" # Storage
     t = 0
     c = 0
-    srt_trees = {key:[] for key in range(tree.count(";\n")+1)}
     if tree[-1] == "\n":
-        srt_trees -= 1
+        srt_trees = {key:[] for key in range(tree.count(";\n"))}
+    else:
+        srt_trees = {key:[] for key in range(tree.count(";\n")+1)}
     if verbose == True:
         console.print(Text.assemble((f"{len(srt_trees)}", shc_val)," trees have been found"))
         time.sleep(speed)

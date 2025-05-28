@@ -1,0 +1,385 @@
+                        Tree 0: Errors                         
+┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃           Num ┃ Error label                                 ┃
+┡━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│             1 │ Coma missplaced at position                 │
+│ (42, '-', 43) │ These two nodes have the exact same content │
+│ (52, '-', 53) │ These two nodes have the exact same content │
+└───────────────┴─────────────────────────────────────────────┘
+
+
+       Tree 0: Taxa        
+┏━━━━━┳━━━━━━━━━━━━━━━━━━━┓
+┃ Num ┃ Taxon label       ┃
+┡━━━━━╇━━━━━━━━━━━━━━━━━━━┩
+│   0 │ Rhynia            │
+│   1 │ Baoyinia          │
+│   2 │ Macivera          │
+│   3 │ Adoketophyton     │
+│   4 │ Demersatheca      │
+│   5 │ Bathurstia        │
+│   6 │ Protobarinophyton │
+│   7 │ Barinophyton      │
+│   8 │ Omniastrobus      │
+│   9 │ Deheubarthia      │
+│  10 │ Crenaticaulis     │
+│  11 │ Anisophyton       │
+│  12 │ Margophyton       │
+│  13 │ Forania           │
+│  14 │ Serrulacaulis     │
+│  15 │ Gosslingia        │
+│  16 │ Thrinkophyton     │
+│  17 │ Sawdonia          │
+│  18 │ Oricilla          │
+│  19 │ Tarella           │
+│  20 │ Euthursophyton    │
+│  21 │ Konioria          │
+│  22 │ Odonax            │
+│  23 │ Gosferia          │
+│  24 │ Asteroxylon       │
+│  25 │ Drepanophycus     │
+│  26 │ Distichophytum    │
+│  27 │ Ventarura         │
+│  28 │ Zosterophyllum    │
+│  29 │ Guangnania        │
+│  30 │ Craswallia        │
+│  31 │ Discalis          │
+│  32 │ Gumuia            │
+│  33 │ Wenshania         │
+│  34 │ Ramoferis         │
+│  35 │ Gutzeitia         │
+│  36 │ Xitunia           │
+│  37 │ Sichuania         │
+│  38 │ Hicklingia        │
+│  39 │ Ornicephalum      │
+│  40 │ Psilophyton       │
+│  41 │ Polythecophyton   │
+└─────┴───────────────────┘
+                        Tree 1: Errors                         
+┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃           Num ┃ Error label                                 ┃
+┡━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│            50 │ Taxonomic content too low.                  │
+│ (49, '-', 51) │ These two nodes have the exact same content │
+│ (49, '-', 52) │ These two nodes have the exact same content │
+│ (51, '-', 52) │ These two nodes have the exact same content │
+└───────────────┴─────────────────────────────────────────────┘
+
+
+       Tree 1: Taxa        
+┏━━━━━┳━━━━━━━━━━━━━━━━━━━┓
+┃ Num ┃ Taxon label       ┃
+┡━━━━━╇━━━━━━━━━━━━━━━━━━━┩
+│   0 │ Aglaophyton       │
+│   1 │ Rhynia            │
+│   2 │ Baoyinia          │
+│   3 │ Macivera          │
+│   4 │ Bathurstia        │
+│   5 │ Protobarinophyton │
+│   6 │ Barinophyton      │
+│   7 │ Omniastrobus      │
+│   8 │ Deheubarthia      │
+│   9 │ Crenaticaulis     │
+│  10 │ Anisophyton       │
+│  11 │ Margophyton       │
+│  12 │ Forania           │
+│  13 │ Serrulacaulis     │
+│  14 │ Gosslingia        │
+│  15 │ Thrinkophyton     │
+│  16 │ Sawdonia          │
+│  17 │ Oricilla          │
+│  18 │ Tarella           │
+│  19 │ Euthursophyton    │
+│  20 │ Konioria          │
+│  21 │ Odonax            │
+│  22 │ Asteroxylon       │
+│  23 │ Drepanophycus     │
+│  24 │ Distichophytum    │
+│  25 │ Ventarura         │
+│  26 │ Zosterophyllum    │
+│  27 │ Guangnania        │
+│  28 │ Craswallia        │
+│  29 │ Gumuia            │
+│  30 │ Discalis          │
+│  31 │ Gosferia          │
+│  32 │ Wenshania         │
+│  33 │ Ramoferis         │
+│  34 │ Gutzeitia         │
+│  35 │ Xitunia           │
+│  36 │ Sichuania         │
+│  37 │ Hicklingia        │
+│  38 │ Ornicephalum      │
+│  39 │ Psilophyton       │
+│  40 │ Polythecophyton   │
+└─────┴───────────────────┘
+        Tree 2: Errors         
+┏━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Num ┃ Error label           ┃
+┡━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━┩
+│ 560 │ Extra closing bracket │
+│ 561 │ Extra closing bracket │
+└─────┴───────────────────────┘
+
+
+       Tree 2: Taxa        
+┏━━━━━┳━━━━━━━━━━━━━━━━━━━┓
+┃ Num ┃ Taxon label       ┃
+┡━━━━━╇━━━━━━━━━━━━━━━━━━━┩
+│   0 │ Aglaophyton       │
+│   1 │ Rhynia            │
+│   2 │ Baoyinia          │
+│   3 │ Macivera          │
+│   4 │ Trichopherophyton │
+│   5 │ Bathurstia        │
+│   6 │ Protobarinophyton │
+│   7 │ Barinophyton      │
+│   8 │ Omniastrobus      │
+│   9 │ Deheubarthia      │
+│  10 │ Crenaticaulis     │
+│  11 │ Anisophyton       │
+│  12 │ Margophyton       │
+│  13 │ Forania           │
+│  14 │ Serrulacaulis     │
+│  15 │ Gosslingia        │
+│  16 │ Thrinkophyton     │
+│  17 │ Sawdonia          │
+│  18 │ Oricilla          │
+│  19 │ Tarella           │
+│  20 │ Euthursophyton    │
+│  21 │ Konioria          │
+│  22 │ Odonax            │
+│  23 │ Gosferia          │
+│  24 │ Asteroxylon       │
+│  25 │ Drepanophycus     │
+│  26 │ Distichophytum    │
+│  27 │ Ventarura         │
+│  28 │ Zosterophyllum    │
+│  29 │ Guangnania        │
+│  30 │ Craswallia        │
+│  31 │ Discalis          │
+│  32 │ Gumuia            │
+│  33 │ Wenshania         │
+│  34 │ Xitunia           │
+│  35 │ Gutzeitia         │
+│  36 │ Ramoferis         │
+│  37 │ Sichuania         │
+│  38 │ Hicklingia        │
+│  39 │ Ornicephalum      │
+│  40 │ Psilophyton       │
+│  41 │ Polythecophyton   │
+└─────┴───────────────────┘
+                        Tree 3: Errors                         
+┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃           Num ┃ Error label                                 ┃
+┡━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ (53, '-', 54) │ These two nodes have the exact same content │
+└───────────────┴─────────────────────────────────────────────┘
+
+
+       Tree 3: Taxa        
+┏━━━━━┳━━━━━━━━━━━━━━━━━━━┓
+┃ Num ┃ Taxon label       ┃
+┡━━━━━╇━━━━━━━━━━━━━━━━━━━┩
+│   0 │ Aglaophyton       │
+│   1 │ Rhynia            │
+│   2 │ Baoyinia          │
+│   3 │ Macivera          │
+│   4 │ Adoketophyton     │
+│   5 │ Demersatheca      │
+│   6 │ Trichopherophyton │
+│   7 │ Bathurstia        │
+│   8 │ Protobarinophyton │
+│   9 │ Barinophyton      │
+│  10 │ Omniastrobus      │
+│  11 │ Deheubarthia      │
+│  12 │ Crenaticaulis     │
+│  13 │ Anisophyton       │
+│  14 │ Margophyton       │
+│  15 │ Forania           │
+│  16 │ Serrulacaulis     │
+│  17 │ Gosslingia        │
+│  18 │ Thrinkophyton     │
+│  19 │ Sawdonia          │
+│  20 │ Oricilla          │
+│  21 │ Tarella           │
+│  22 │ Euthursophyton    │
+│  23 │ Konioria          │
+│  24 │ Odonax            │
+│  25 │ Gosferia          │
+│  26 │ Asteroxylon       │
+│  27 │ Drepanophycus     │
+│  28 │ Distichophytum    │
+│  29 │ Ventarura         │
+│  30 │ Zosterophyllum    │
+│  31 │ Guangnania        │
+│  32 │ Craswallia        │
+│  33 │ Discalis          │
+│  34 │ Gumuia            │
+│  35 │ Wenshania         │
+│  36 │ Xitunia           │
+│  37 │ Gutzeitia         │
+│  38 │ Ramoferis         │
+│  39 │ Sichuania         │
+│  40 │ Hicklingia        │
+│  41 │ Ornicephalum      │
+│  42 │ Psilophyton       │
+│  43 │ Polythecophyton   │
+└─────┴───────────────────┘
+       Tree 4: Taxa        
+┏━━━━━┳━━━━━━━━━━━━━━━━━━━┓
+┃ Num ┃ Taxon label       ┃
+┡━━━━━╇━━━━━━━━━━━━━━━━━━━┩
+│   0 │ Aglaophyton       │
+│   1 │ Rhynia            │
+│   2 │ Baoyinia          │
+│   3 │ Macivera          │
+│   4 │ Adoketophyton     │
+│   5 │ Demersatheca      │
+│   6 │ Trichopherophyton │
+│   7 │ Bathurstia        │
+│   8 │ Protobarinophyton │
+│   9 │ Barinophyton      │
+│  10 │ Omniastrobus      │
+│  11 │ Deheubarthia      │
+│  12 │ Crenaticaulis     │
+│  13 │ Anisophyton       │
+│  14 │ Margophyton       │
+│  15 │ Forania           │
+│  16 │ Serrulacaulis     │
+│  17 │ Gosslingia        │
+│  18 │ Thrinkophyton     │
+│  19 │ Sawdonia          │
+│  20 │ Oricilla          │
+│  21 │ Tarella           │
+│  22 │ Euthursophyton    │
+│  23 │ Konioria          │
+│  24 │ Odonax            │
+│  25 │ Asteroxylon       │
+│  26 │ Drepanophycus     │
+│  27 │ Distichophytum    │
+│  28 │ Ventarura         │
+│  29 │ Zosterophyllum    │
+│  30 │ Guangnania        │
+│  31 │ Craswallia        │
+│  32 │ Gumuia            │
+│  33 │ Discalis          │
+│  34 │ Gosferia          │
+│  35 │ Wenshania         │
+│  36 │ Xitunia           │
+│  37 │ Gutzeitia         │
+│  38 │ Ramoferis         │
+│  39 │ Sichuania         │
+│  40 │ Hicklingia        │
+│  41 │ Ornicephalum      │
+│  42 │ Psilophyton       │
+│  43 │ Polythecophyton   │
+└─────┴───────────────────┘
+           Tree 5: Errors            
+┏━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Num ┃ Error label                 ┃
+┡━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│  43 │ Associated value missing.   │
+│  44 │ Coma missplaced at position │
+│  94 │ Associated value missing.   │
+│  95 │ Coma missplaced at position │
+└─────┴─────────────────────────────┘
+
+
+       Tree 5: Taxa        
+┏━━━━━┳━━━━━━━━━━━━━━━━━━━┓
+┃ Num ┃ Taxon label       ┃
+┡━━━━━╇━━━━━━━━━━━━━━━━━━━┩
+│   0 │ Aglaophyton       │
+│   1 │ Rhynia            │
+│   2 │ Baoyinia          │
+│   3 │ Macivera          │
+│   4 │ Adoketophyton     │
+│   5 │ Demersatheca      │
+│   6 │ Trichopherophyton │
+│   7 │ Bathurstia        │
+│   8 │ Protobarinophyton │
+│   9 │ Barinophyton      │
+│  10 │ Omniastrobus      │
+│  11 │ Deheubarthia      │
+│  12 │ Crenaticaulis     │
+│  13 │ Anisophyton       │
+│  14 │ Margophyton       │
+│  15 │ Forania           │
+│  16 │ Serrulacaulis     │
+│  17 │ Gosslingia        │
+│  18 │ Thrinkophyton     │
+│  19 │ Sawdonia          │
+│  20 │ Oricilla          │
+│  21 │ Tarella           │
+│  22 │ Euthursophyton    │
+│  23 │ Konioria          │
+│  24 │ Odonax            │
+│  25 │ Asteroxylon       │
+│  26 │ Drepanophycus     │
+│  27 │ Distichophytum    │
+│  28 │ Ventarura         │
+│  29 │ Zosterophyllum    │
+│  30 │ Guangnania        │
+│  31 │ Craswallia        │
+│  32 │ Gumuia            │
+│  33 │ Discalis          │
+│  34 │ Gosferia          │
+│  35 │ Wenshania         │
+│  36 │ Xitunia           │
+│  37 │ Gutzeitia         │
+│  38 │ Ramoferis         │
+│  39 │ Sichuania         │
+│  40 │ Hicklingia        │
+│  41 │ Ornicephalum      │
+│  42 │ Psilophyton       │
+│  43 │ Polythecophyton   │
+└─────┴───────────────────┘
+       Tree 6: Taxa        
+┏━━━━━┳━━━━━━━━━━━━━━━━━━━┓
+┃ Num ┃ Taxon label       ┃
+┡━━━━━╇━━━━━━━━━━━━━━━━━━━┩
+│   0 │ Aglaophyton       │
+│   1 │ Rhynia            │
+│   2 │ Baoyinia          │
+│   3 │ Craswallia        │
+│   4 │ Discalis          │
+│   5 │ Gosferia          │
+│   6 │ Guangnania        │
+│   7 │ Gumuia            │
+│   8 │ Macivera          │
+│   9 │ Trichopherophyton │
+│  10 │ Zosterophyllum    │
+│  11 │ Adoketophyton     │
+│  12 │ Demersatheca      │
+│  13 │ Bathurstia        │
+│  14 │ Barinophyton      │
+│  15 │ Omniastrobus      │
+│  16 │ Protobarinophyton │
+│  17 │ Deheubarthia      │
+│  18 │ Crenaticaulis     │
+│  19 │ Anisophyton       │
+│  20 │ Margophyton       │
+│  21 │ Forania           │
+│  22 │ Serrulacaulis     │
+│  23 │ Gosslingia        │
+│  24 │ Thrinkophyton     │
+│  25 │ Sawdonia          │
+│  26 │ Oricilla          │
+│  27 │ Tarella           │
+│  28 │ Euthursophyton    │
+│  29 │ Konioria          │
+│  30 │ Odonax            │
+│  31 │ Distichophytum    │
+│  32 │ Ventarura         │
+│  33 │ Asteroxylon       │
+│  34 │ Drepanophycus     │
+│  35 │ Wenshania         │
+│  36 │ Gutzeitia         │
+│  37 │ Ramoferis         │
+│  38 │ Xitunia           │
+│  39 │ Sichuania         │
+│  40 │ Hicklingia        │
+│  41 │ Ornicephalum      │
+│  42 │ Psilophyton       │
+│  43 │ Polythecophyton   │
+└─────┴───────────────────┘
