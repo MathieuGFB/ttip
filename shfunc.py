@@ -119,24 +119,7 @@ def load(path_tree, verbose, speed):
             else:
                 console.print(Text.assemble("Nexus file is missing a valid TREE block.", style = error))
         else:
-            console.print(Text.assemble("This file is not supported. Newick format (.tre; .tree; .phy) and Nexus files (.nex; .nexus) are the only supported files.", style = error))
-
-def replace(tre1, tre2, kw, verbose = False, speed = 0.2):
-    # 1. locate kw in tre1
-    try:
-        tre1.find(kw) != -1
-    except:
-        print(f"The keyword {kw} has not been found in the tree")
-    else:
-        # 2. replace kw in tre1 by tre2
-        if verbose == True:
-            print(f"{kw} have been found in the first tree")
-            time.sleep(speed)
-        i = tre1.find(kw)
-        tree = tre1[0:i] # First part of the tree
-        tree = tree + tre2[0:len(tre2)-1] # Insert subtree
-        tree = tree + tre1[i+len(kw):len(tre1)] # Second part of the tree minus the keyword
-        return(tree)
+            console.print(Text.assemble("This file is not supported. Newick format (.tre; .tree; .phy) and Nexus files (.nex; .nexus) are the only supported files.", style = error))     
     
 def write_log(trees_list):
     for i in range(len(trees_list)):
@@ -190,3 +173,11 @@ def write_log(trees_list):
                     rprint(table_tax, file = save_file)
                 else:
                     rprint(table_tax, file = save_file)
+
+def replace(maintree, subtree, keyword, verbose = False, speed = 0.2):
+    pos = maintree.find(keyword)
+
+    newtree = maintree[0:pos] # First part of the tree
+    newtree = newtree + subtree[0:len(subtree)-1] # Insert subtree
+    newtree = newtree + maintree[pos+len(kw):len(maintree)] # Second part of the tree minus the keyword
+    return(newtree)

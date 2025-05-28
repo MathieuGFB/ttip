@@ -46,10 +46,15 @@ def merge(
        None,
        "--verbose",
        help = "Bring extra information during computation"
+   ),
+    check: Optional[bool] = typer.Option(
+       None,
+       "--verify",
+       help = "Check the validity of the trees before merging"
    )
 ) -> ttip.merge:
     """
-    Replace the provided keyword in the main tree by the subtree. (WIP)
+    Replace the provided keyword in the main tree by the subtree.
     """
     try:
         os.path.exists(path_to_main_tree)
@@ -66,13 +71,17 @@ def merge(
 @app.command()
 def convert(
     path_to_tree: str,
-    from_format: str,
     to_format: str,
     verbose: Optional[bool] = typer.Option(
         None,
         "--verbose",
         help = "Bring extra information during computation"
-    )
+    ),
+    check: Optional[bool] = typer.Option(
+       None,
+       "--verify",
+       help = "Check the validity of the trees before merging"
+   )
 ) -> ttip.convert:
     """
     Convert a file from a designated format to another format. (WIP)
@@ -82,7 +91,7 @@ def convert(
     except:
         print(f"The provided path, {path_to_tree}, does not seems to be a valid one. Please, check it.")
     else:
-        return ttip.convert(path_to_tree, from_format, to_format, verbose)
+        return ttip.convert(path_to_tree, to_format, verbose)
 
 @app.command()
 def calibrate(
