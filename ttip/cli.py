@@ -91,7 +91,7 @@ def convert(
     except:
         print(f"The provided path, {path_to_tree}, does not seems to be a valid one. Please, check it.")
     else:
-        return ttip.convert(path_to_tree, to_format, verbose)
+        return ttip.convert(path_to_tree, to_format, check, verbose)
 
 @app.command()
 def calibrate(
@@ -110,7 +110,7 @@ def calibrate(
     except:
         print(f"The provided path, {path_to_tree}, does not seems to be a valid one. Please, check it.")
     else:
-        return ttip.convert(path_to_tree, from_format, to_format, verbose)
+        return ttip.convert(path_to_tree, verbose)
 
 @app.callback()
 def main(
