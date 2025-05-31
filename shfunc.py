@@ -181,3 +181,8 @@ def replace(maintree, subtree, keyword, verbose = False, speed = 0.2):
     newtree = newtree + subtree[0:len(subtree)-1] # Insert subtree
     newtree = newtree + maintree[pos+len(kw):len(maintree)] # Second part of the tree minus the keyword
     return(newtree)
+
+def setwd(path):
+    wd = path
+    # remove last part of path
+    return(wd)

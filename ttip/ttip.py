@@ -3,9 +3,10 @@
 # v 0.0.3
 
 from verif import verif
-from shfunc import load, write_log, replace
+from shfunc import load, write_log, replace, setwd
 from rich.text import Text
 from rich.console import Console
+from convert import to_nexus
 
 # Rich styles
 shc_val = "cyan bold"
@@ -30,6 +31,7 @@ def verify(path_to_tree, verbose = False):
 
 def merge(path_to_main_tree, path_to_subtree, keyword, verbose = False, check = False):
     console = Console()
+    wd = setwd(path_to_main_tree) # In progress
     if verbose == True:
         console.print(Text.assemble("Provided filepath for maintree ", (f"{path_to_main_tree}", "underline"), style = "italic"))
     maintree = {}
@@ -84,26 +86,40 @@ def merge(path_to_main_tree, path_to_subtree, keyword, verbose = False, check = 
                     
 def convert(path_to_tree, to_format, check = False, verbose = False):
     console = Console()
-    if verbose == True:
-        console.print(Text.assemble("Provided filepath for tree ", (f"{path_to_tree}", "underline"), style = "italic"))
-    trees_list = {}
-    trees_list = load(path_to_tree, verbose, speed = 0.02)
-    if check == True:
-        for i in range(len(trees_list)):
-            if verbose == True:
-                console.print(Text.assemble(f"\n--- Verification of tree ", (f"{i+1}", shc_val), " on ", (f"{len(trees_list)}\n", shc_val), style = "italic bold"))
-            if ":".find(trees_list[i].seq) != -1:
-                trees_list[i].errors, trees_list[i].taxa, trees_list[i].tax_val, trees_list[i].nod_val= verif(trees_list[i].seq, verbose, values = True, speed = 0.02)
-            else:
-                trees_list[i].errors, trees_list[i].taxa, = verif(trees_list[i].seq, verbose, speed = 0.02)
-        if len(maintree[0].error) == 0:
-            chk = True
-            for i in range(len(subtrees)):
-                if len(subtrees.error) != 0:
-                    chk = False
-            if chk == False:
-                console.print(Text.assemble("At least one of the provided trees contains errors. Please fix them first."), style = error)
-    print("Work in progress")
+    wd = setwd(path_to_tree) # In progress
+    try:
+        to_format == "nexus" or to_format == "newick" # Cass sensitive
+    except:
+        console.print(Text.assemble("Unknown destination format. Please use 'newick' or 'nexus'."))
+    else:
+        if verbose == True:
+            console.print(Text.assemble("Provided filepath for tree ", (f"{path_to_tree}", "underline"), style = "italic"))
+        trees_list = {}
+        trees_list = load(path_to_tree, verbose, speed = 0.02)
+        if check == True:
+            for i in range(len(trees_list)):
+                if verbose == True:
+                    console.print(Text.assemble(f"\n--- Verification of tree ", (f"{i+1}", shc_val), " on ", (f"{len(trees_list)}\n", shc_val), style = "italic bold"))
+                if ":".find(trees_list[i].seq) != -1:
+                    trees_list[i].errors, trees_list[i].taxa, trees_list[i].tax_val, trees_list[i].nod_val= verif(trees_list[i].seq, verbose, values = True, speed = 0.02)
+                else:
+                    trees_list[i].errors, trees_list[i].taxa, = verif(trees_list[i].seq, verbose, speed = 0.02)
+            if len(maintree[0].error) == 0:
+                chk = True
+                for i in range(len(subtrees)):
+                    if len(subtrees.error) != 0:
+                        chk = False
+                if chk == False:
+                    console.print(Text.assemble("At least one of the provided trees contains errors. Please fix them first."), style = error)
+                else: 
+                    if to_format == "nexus": # Add small to remove cass sensitive
+                        to_nexus(trees_list, verbose = False) # WIP
+                    if to_format == "newick": # Idem
+                        with open("newfile.tre", "w") as save_file:
+                            for i in range(len(trees_list)):
+                                print(trees_list[i].seq, "\n", file = save_file)
 
 def calibrate(path_to_tree, check = False, verbose = False):
+    # Fetch from PBDB
+    # Need varcov
     print("Work in progress")
