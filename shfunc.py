@@ -174,7 +174,7 @@ def write_log(trees_list):
                 else:
                     rprint(table_tax, file = save_file)
 
-def replace(maintree, subtree, keyword, verbose = False, speed = 0.2):
+def replace(maintree, subtree, keyword, verbose = False): # WIP
     pos = maintree.find(keyword)
 
     newtree = maintree[0:pos] # First part of the tree
@@ -182,7 +182,42 @@ def replace(maintree, subtree, keyword, verbose = False, speed = 0.2):
     newtree = newtree + maintree[pos+len(kw):len(maintree)] # Second part of the tree minus the keyword
     return(newtree)
 
-def setwd(path):
+def setwd(path): # WIP
     wd = path
     # remove last part of path
     return(wd)
+
+def hierarchy(tree):
+    n = 0 # Loop counter
+    m = 0 # 2nd loop counter
+    c = 0 # Node counter
+    nodes = {} # Dic of nodes and content
+    opnod = [] # Open node list
+
+    operators = "(),;:" # All operators
+
+    while n != len(tree):
+        if tree[n] == "(":
+            if n != 0:
+                nodes[opnod[-1]].append(c)
+            nodes[c] = []
+            opnod.append(c)
+            c += 1
+            n += 1
+        elif tree[n] == ")":
+            opnod.pop(-1)
+            n += 1
+        elif operators.find(tree[n]) == -1:
+            m = n + 1
+            while operators.find(tree[m]) == -1:
+                m += 1
+            tax = tree[n:m]
+            nodes[opnod[-1]].append(tax)
+            n = m
+        elif tree[n] == ":":
+            m = n + 1
+            while operators.find(tree[m]) == -1:
+                m += 1
+            n = m
+        else:
+            n += 1

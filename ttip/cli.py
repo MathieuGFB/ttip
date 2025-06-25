@@ -81,7 +81,7 @@ def convert(
        None,
        "--verify",
        help = "Check the validity of the trees before merging"
-   )
+    )
 ) -> ttip.convert:
     """
     Convert a file from a designated format to another format. (WIP)
@@ -100,6 +100,11 @@ def calibrate(
         None,
         "--verbose",
         help = "Bring extra information during computation"
+    ),
+    check: Optional[bool] = typer.Option(
+       None,
+       "--verify",
+       help = "Check the validity of the trees before merging"
     )
 ) -> ttip.calibrate:
     """

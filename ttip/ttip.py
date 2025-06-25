@@ -119,7 +119,8 @@ def convert(path_to_tree, to_format, check = False, verbose = False):
                             for i in range(len(trees_list)):
                                 print(trees_list[i].seq, "\n", file = save_file)
 
-def calibrate(path_to_tree, check = False, verbose = False):
+def calibrate(path_to_tree, dat = "lag", check = False, verbose = False):
     # Fetch from PBDB
     # Need varcov
+    # dat = lag or eag
     print("Work in progress")
